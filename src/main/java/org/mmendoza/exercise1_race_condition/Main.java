@@ -3,7 +3,7 @@ package org.mmendoza.exercise1_race_condition;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        CounterAtomicInteger counter = new CounterAtomicInteger();
+        CounterReentrantLock counterReentrantLock = new CounterReentrantLock();
 
         long start = System.currentTimeMillis();
 
@@ -15,7 +15,7 @@ public class Main {
 
             Runnable tarea = () -> {
                 System.out.println("Hilo " + numeroHilo + " ejecutándose");
-                counter.increment();
+                counterReentrantLock.increment();
             };
 
             hilos[i] = new Thread(tarea);
@@ -30,6 +30,6 @@ public class Main {
         long end = System.currentTimeMillis();
 
         System.out.println("total time: " + (end - start));
-        System.out.println("Contador final: " + counter.getCounter());
+        System.out.println("Contador final: " + counterReentrantLock.getCounter());
     }
 }
